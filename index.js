@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 import { TaskController } from './controllers/index.js';
 
-const MONGO_URI = `mongodb://admin:Dc8ztotE3DyMozSm@cluster0-shard-00-00.uffmt.mongodb.net:27017,cluster0-shard-00-01.uffmt.mongodb.net:27017,cluster0-shard-00-02.uffmt.mongodb.net:27017/habrusers?ssl=true&replicaSet=atlas-pchf5i-shard-0&authSource=admin&retryWrites=true&w=majority`;
+const MONGO_URI = process.env.MONGO_URI;
 
 const PORT = process.env.PORT || 5000;
 const app = express();
