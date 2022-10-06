@@ -67,12 +67,17 @@ export const create = async (request, response) => {
 
 export const remove = async (request, response) => {
     try {
-        const _id = request.body._id;
-        const task = await Task.findOne({_id});
         let deleted = null;
+        const ids = request.body._id;
 
-        if (task) deleted = await Task.deleteOne({_id});
-
+        if (ids.length === 1) {
+            const task = await Task.findOne({_id: ids[0]});
+            
+            if (task) deleted = await Task.deleteOne({_id: ids[0]});
+        } else if (ids.length > 1) {
+            deleted = await Task.deleteMany({_id: { $in: ids }});
+        }
+        
         return response.status(200).json({
             status: "ok",
             message: "Успешно",
